@@ -1,8 +1,10 @@
 {% extends 'users/base.html' %}
-
+{% load add_attr %}
 {% load static %}
 
-
+{% block nav %}
+    {% include 'users/index.html' %}
+{% endblock %}
 {% block content %}
     <section class="signup">
         <div class="container">
@@ -10,14 +12,15 @@
                 <div class="signup-form">
                     <h2 class="form-title">Sign up</h2>
                     <form method="POST" class="register-form" id="register-form" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="form-group">
 
                             <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            {{ form.username }}
+                            {{ form.username|add_classes:form.username.label }}
                         </div>
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-email"></i></label>
-                            {{ form.email }}
+                            {{ form.email|add_classes:form.email.label }}
                         </div>
 
                         <div class="form-group">
@@ -26,15 +29,15 @@
                                 <span class="file-custom"></span>
                             </label>
                             <label for="pass"><i class="zmdi zmdi-image"></i></label>
-                            {{ form.image }}
+                            {{ form.image|add_classes:form.email.label }}
                         </div>
                         <div class="form-group">
                             <label for="re_pass"><i class="zmdi zmdi-lock"></i></label>
-                            {{ form.password1 }}
+                            {{ form.password1|add_classes:form.password1.label }}
                         </div>
                         <div class="form-group">
                             <label for="re_pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                            {{ form.password2 }}
+                            {{ form.password2|add_classes:form.password2.label }}
                         </div>
 
                         <div class="form-group">
@@ -47,6 +50,7 @@
                         </div>
                     </form>
                 </div>
+                {{ form.errors }}
                 <div class="signup-image">
                     <figure><img src="{% static 'users/images/signup-image.jpg' %}" alt="sing up image"></figure>
                     <a href="{% url 'users:login' %}" class="signup-image-link">I am already member</a>

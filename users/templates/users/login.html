@@ -16,9 +16,13 @@
 {##}
 {##}
 {#{% endblock %}#}
+{% block nav %}
+{% include 'users/index.html' %}
+{% endblock %}
+
 {% block content %}
     {#    {{ 'salom'|add_attr:'birnimalarni yuborish kerak edi lekin men  nima yozishni bilmadim bu shunchaki test' }}#}
-    {% if errors %}#}
+    {% if errors %}
         <p>parol yoki email xato</p>
     {% endif %}
 {#    {{ form.email|add_placeholder:'font_form' }}#}
@@ -33,6 +37,7 @@
                 <div class="signin-form">
                     <h2 class="form-title">Sign up</h2>
                     <form method="POST" class="register-form" id="login-form">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                             {{ form.email }}
